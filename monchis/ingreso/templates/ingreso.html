@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE HTML5>
+<html>
+<head>
+<meta charset="UTF-8">
+
+
+<style>
+table1 {
+   position: absolute;
+   width: 100%;
+   border: 1px solid #999;
+   text-align: left;
+   border-collapse: collapse;
+   margin: 0 0 1em 0;
+   caption-side: top;
+}
+caption, td, th {
+   padding: 0.1em;
+}
+th, td {
+   border-bottom: 0.5px solid #999;
+   width: 50%;
+}
+caption {
+   font-weight: bold;
+   font-style: italic;
+}
+</style>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'logo.ico' %}"/>
+    <title>Ingreso numero: {{ miingreso.no_ingreso }}</title>
+    <img alt="" src="{% static "head.PNG" %}">
+
+</head>
+<body>
+        <h2>DATOS DEL INGRESO NUMERO: {{ miingreso.no_ingreso }}</h2>
+            <h3>
+            <table width="300" border="0">
+                <tr>
+                    <th align="left">
+                        Trabajador:
+                    </th>
+                    <td align="left">
+                        {{ miingreso.vendedor }}
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left">
+                        Fecha de ingreso:
+                    </th>
+                    <td align="left">
+                        {{ miingreso.fecha | date:"d/m/Y" }}
+                    </td>
+                </tr>
+            </table>
+            </h3>
+        <br>
+<!--
+-->
+<table>
+    <h2><center>Listado de productos ingresados</center></h2>
+    <h2>
+    <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+    </tr>
+    {% for deta1 in deta %}
+        {% if miingreso.no_ingreso == deta1.id_ingreso.no_ingreso %}
+        <tr>
+        <td><h2><center>{{ deta1.id_prod }}</center></td>
+        <td><h2><center>{{ deta1.canti }}</center></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+</body>
+</html>

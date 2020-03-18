@@ -1,0 +1,53 @@
+{% extends "easy_pdf/base.html" %}
+{% block content %}
+
+<!DOCTYPE HTML5>
+<html>
+    {% if user.is_authenticated %}
+        {% if request.user.is_superuser %}
+    <head>
+        <style type="text/css">
+        body {
+        color: black;
+        background-color: #189dff }
+        </style>
+        <meta charset="utf-8">
+        <meta name="author" content="">
+        <meta name="description" content="Ejercicios prácticos HTML5">
+        <meta name="keywords" content="Ejercicios, Soluciones, Prácticas, HTML5">
+        <title>LISTA DE CLIENTES</title>
+    </head>
+    <body>
+<table border="">
+    <h1><center>Lista de clientes</center></h1>
+    <tr>
+        <th><h1>Nit</th>
+        <th><h1>Nombre</th>
+        <th><h1>Apellido</th>
+        <th><h1>Direccion</th>
+        <th><h1>Email</th>
+        <th><h1>Activo</th>
+    </tr>
+    {% for deta1 in clien %}
+        {% if deta1.activo == True %}
+        <tr>
+        <td><h3><center>{{ deta1.nit }}</center></td>
+        <td><h3><center>{{ deta1.nombre }}</center></td>
+        <td><h3><center>{{ deta1.apellido }}</center></td>
+        <td><h3><center>{{ deta1.direccion }}</center></td>
+        <td><h3><center>{{ deta1.email }}</center></td>
+        <td><h3><center>{{ deta1.activo }}</center></td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+</body>
+        {% else %}
+            NO TIENES PERMISOS PARA VER ESTA PAGINA
+        {% endif %}
+    {% else %}
+        DEBES INICIAR SESION
+    {% endif %}
+
+</html>
+{% endblock %}

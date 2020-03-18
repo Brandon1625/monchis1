@@ -1,0 +1,41 @@
+{% extends "easy_pdf/base.html" %}
+{% block content %}
+
+<!DOCTYPE HTML5>
+
+<html>
+    <head>
+        <style type="text/css">
+        body {
+        color: black;
+        background-color: #189dff }
+        </style>
+        <meta charset="utf-8">
+        <meta name="author" content="">
+        <meta name="description" content="Ejercicios prácticos HTML5">
+        <meta name="keywords" content="Ejercicios, Soluciones, Prácticas, HTML5">
+        <title>LISTA DE PRODUCTOS</title>
+    </head>
+    <body>
+<table border="1">
+    <h1><center>Lista de productos<br>
+    Fecha: {% now "j F Y" %}</center></h1>
+    <tr>
+        <th><h1>Producto</th>
+        <th><h1>Categoria</th>
+        <th><h1>Descripcion</th>
+        <th><h1>Cantidad</th>
+    </tr>
+    {% for deta1 in prod %}
+        <tr>
+        <td><h2><center>{{ deta1.nombre }}</center></td>
+        <td><h2><center>{{ deta1.categoria }}</center></td>
+        <td><h2><center>{{ deta1.descripcion }}</center></td>
+        <td><h2><center>{{ deta1.cantidad }}</center></td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+
+</html>
+{% endblock %}

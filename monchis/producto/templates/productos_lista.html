@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<style>
+.card {
+  box-shadow: 0 9px 9px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: left;
+  font-family: Helvetica;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #E06CA3;
+}
+
+.foot {
+  overflow: hidden;
+  background-color: #9FF0D6;
+}
+
+.topnav a {
+  float: left;
+  color: coral;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+
+}
+
+.topnav a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+</style>
+
+<meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+{% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'logo.ico' %}"/>
+    <div class="topnav">
+        <a href="/contacto">Contacto</a>
+        <center><h2>CREACIONES RASS</h2></center>
+    </div>
+    <title>CREACIONES RASS</title>
+    <center><img src="{% static "imgrass.PNG" %}" alt="My image" width="300" height="300"></center>
+
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Solo en Creaciones RASS</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <center><img src="{% static "imgrass.PNG" %}" alt="RASS" style="width:40%;"></center>
+      </div>
+{% if productos %}
+    {% for pr in productos %}
+        {% if pr.cantidad > 0 %}
+            {% if pr.visible == True %}
+                {% if pr.image %}
+                    <div class="item">
+                        <center><img src="{{ pr.image.url }}" alt="{{pr.nombre}}" style="width:50%;"></center>
+                        <div class="carousel-caption">
+                            <h3 style="color:black; background-color:white;"></h3>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+
+<div class="container">
+<div class="row">
+{% if productos %}
+    {% for pr in productos %}
+        {% if pr.cantidad > 0 %}
+            {% if pr.visible == True %}
+                <div class="col-md-4">
+                    <br>
+                    <div class="card">
+                        {% if pr.image %}
+                            <img src="{{ pr.image.url }}" alt="{{pr.nombre}}" style="width:100%">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5><b>{{ pr.nombre }}</b></h5>
+                            <p class="card-text">Disponible: {{ pr.cantidad }} unidades</p>
+                        {% if pr.precio_visible == True %}
+                            <p class="card-text">Precio: Q{{ pr.precio }}</p>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</div>
+</div>
+
+</body>
+</html>

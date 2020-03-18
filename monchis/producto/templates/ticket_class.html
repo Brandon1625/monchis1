@@ -1,0 +1,50 @@
+{% load static %}
+<!doctype html>
+<html>
+    {% if user.is_authenticated %}
+        {% if request.user.is_superuser %}
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'logo.ico' %}"/>
+  <title>Informe de productos</title>
+
+  <script type="text/javascript">
+  function actualizar(){location.reload(true);}
+//Función para actualizar cada 4 segundos(4000 milisegundos)
+  setInterval("actualizar()",4000);
+</script>
+
+</head>
+<body>
+  <div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+Highcharts.chart('container', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'INFORME DE PRODUCTOS'
+      },
+      xAxis: {
+          categories: [
+            {% for entry in dataset %}'{{ entry.nombre }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+          ]
+      },
+      series: [{
+          name: 'Cantidad',
+          data: [
+            {% for entry in dataset %}{{ entry.cantidad }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'green'
+      }]
+  });
+</script>
+</body>
+        {% else %}
+            NO TIENES PERMISOS PARA VER ESTA PAGINA
+        {% endif %}
+    {% else %}
+        DEBES INICIAR SESION
+    {% endif %}
+</html>

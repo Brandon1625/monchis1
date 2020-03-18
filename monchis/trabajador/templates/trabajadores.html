@@ -1,0 +1,39 @@
+{% extends "easy_pdf/base.html" %}
+{% block content %}
+
+<!DOCTYPE HTML5>
+<html>
+    <head>
+        <style type="text/css">
+        body {
+        color: black;
+        background-color: #189dff }
+        </style>
+        <meta charset="utf-8">
+        <title>LISTA DE TRABAJADORES</title>
+    </head>
+    <body>
+<table border="">
+    <h1><center>Lista de trabajadores</center></h1>
+    <tr>
+        <th><h1><p style="color:blue";>Codigo</p></th>
+        <th><h1><p style="color:blue";>Nombre</p></th>
+        <th><h1><p style="color:blue";>Apellido</p></th>
+        <th><h1><p style="color:blue";>Direccion</p></th>
+        <th><h1><p style="color:blue";>Telefono</p></th>
+        <th><h1><p style="color:blue";> Nacimiento</p></th>
+    </tr>
+    {% for deta1 in trab %}
+        <tr>
+        <td><h3><center>{{ deta1.codigo }}</center></td>
+        <td><h3><center>{{ deta1.nombre }}</center></td>
+        <td><h3><center>{{ deta1.apellido }}</center></td>
+        <td><h3><center>{{ deta1.direccion }}</center></td>
+        <td><h3><center>{{ deta1.telefono }}</center></td>
+        <td><h3><center>{{ deta1.fecha_nacimiento | date:"d/m/Y" }}</center></td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}

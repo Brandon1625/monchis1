@@ -1,0 +1,65 @@
+{% extends "easy_pdf/base.html" %}
+{% block content %}
+
+<!DOCTYPE HTML5>
+<html>
+    <head>
+
+    <style>
+table1 {
+   position: absolute;
+   width: 100%;
+   border: 1px solid #999;
+   text-align: left;
+   border-collapse: collapse;
+   margin: 0 0 1em 0;
+   caption-side: top;
+}
+caption, td, th {
+   padding: 0.1em;
+}
+th, td {
+   border-bottom: 0.5px solid #999;
+   width: 50%;
+}
+caption {
+   font-weight: bold;
+   font-style: italic;
+}
+</style>
+
+        <meta charset="utf-8">
+        <title>LISTA DE CLIENTES</title>
+
+    </head>
+    <body>
+<table border="">
+    <h1><center>Lista de clientes <br>
+    Fecha: {% now "j F Y" %}</center></h1>
+    <tr>
+        <th><h1>Nit</th>
+        <th><h1>Nombre</th>
+        <th><h1>Apellido</th>
+        <th><h1>Direccion</th>
+        <th><h1>Email</th>
+        <th><h1>Activo</th>
+    </tr>
+    {% for deta1 in clien %}
+        <tr>
+        <td><h1><center>{{ deta1.nit }}</center></td>
+        <td><h1><center>{{ deta1.nombre }}</center></td>
+        <td><h1><center>{{ deta1.apellido }}</center></td>
+        <td><h1><center>{{ deta1.direccion }}</center></td>
+        <td><h1><center>{{ deta1.email }}</center></td>
+        {% if deta1.activo == True %}
+            <td><h1><center>Activo</center></td>
+        {% endif %}
+        {% if deta1.activo == False %}
+            <td><h1><center>Inactivo</center></td>
+        {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}

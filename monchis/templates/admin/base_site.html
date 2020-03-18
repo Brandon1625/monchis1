@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{% block title %} RASS {% endblock %}
+{% block branding %}
+{% load static %}
+<center>
+<a href="{% url 'admin:index' %}">
+<img src="{% static "imgrass.PNG" %}" alt="My image" width="50" height="50">
+</a>
+<i><h1 id="site-name"><a href="{% url 'admin:index' %}">Creaciones RASS</a></h1></i>
+</center>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

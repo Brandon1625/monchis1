@@ -1,0 +1,88 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+    {% if user.is_authenticated %}
+        {% if request.user.is_superuser %}
+  <meta charset="utf-8">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'logo.ico' %}"/>
+  <title>Informe de ventas del mes</title>
+
+</head>
+<body>
+  <div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+
+Highcharts.chart('container', {
+
+    title: {
+        text: 'Ventas del mes'
+    },
+
+
+    yAxis: {
+        title: {
+            text: 'Total'
+        }
+    },
+
+      xAxis: {
+          categories: [
+            {% for entry in dataset %}'{{ entry.day }}'{% if not forloop.last %}, {% endif %}{% endfor %}
+          ]
+      },
+
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            },
+        }
+    },
+
+    series: [{
+        name: 'Total',
+        data: [
+            {% for entry in dataset %}
+                {% if entry.sum == 0 %}
+                    null
+                {% else %}
+                    {{entry.sum|stringformat:"f"}}
+                {% endif %},
+            {% endfor %}
+        ]
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+
+</script>
+</body>
+        {% else %}
+            NO TIENES PERMISOS PARA VER ESTA PAGINA
+        {% endif %}
+    {% else %}
+        DEBES INICIAR SESION
+    {% endif %}
+</html>

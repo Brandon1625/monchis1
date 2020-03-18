@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; {% trans 'Server error' %}
+</div>
+{% endblock %}
+
+{% block title %}SORRY :({% endblock %}
+
+{% block content %}
+<h1>SORRY :(</h1>
+<center>
+<img src="https://media.istockphoto.com/vectors/error-page-design-vector-id1022917032" height="300px" width="500px">
+
+{% endblock %}
